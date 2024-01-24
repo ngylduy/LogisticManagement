@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data Access", "Data Access\Data Access.csproj", "{1BB51704-443D-4533-94EF-CB0DE0894A42}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessObject", "BusinessObject\BusinessObject.csproj", "{5E6597E6-5B25-4AE1-A11B-E3336690CDD5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Data Layer", "3. Data Layer", "{4B52FDBC-F478-43D9-946C-E847655F49EB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Business Layer", "2. Business Layer", "{960895F7-D59C-47EE-A002-1A7DFC840056}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Presentation Layer", "1. Presentation Layer", "{576F68C1-ABC2-4FF7-89EF-EAE914915D38}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1BB51704-443D-4533-94EF-CB0DE0894A42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BB51704-443D-4533-94EF-CB0DE0894A42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BB51704-443D-4533-94EF-CB0DE0894A42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BB51704-443D-4533-94EF-CB0DE0894A42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E6597E6-5B25-4AE1-A11B-E3336690CDD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E6597E6-5B25-4AE1-A11B-E3336690CDD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E6597E6-5B25-4AE1-A11B-E3336690CDD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E6597E6-5B25-4AE1-A11B-E3336690CDD5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1BB51704-443D-4533-94EF-CB0DE0894A42} = {4B52FDBC-F478-43D9-946C-E847655F49EB}
+		{5E6597E6-5B25-4AE1-A11B-E3336690CDD5} = {960895F7-D59C-47EE-A002-1A7DFC840056}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {34DCC64E-9F65-4F9F-818F-428674F559EA}
+	EndGlobalSection
+EndGlobal
