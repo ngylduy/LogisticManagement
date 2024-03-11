@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -7,12 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Data Access\Data Access.csproj" />
+    <Compile Remove="DAO\**" />
+    <Compile Remove="Repository\**" />
+    <EmbeddedResource Remove="DAO\**" />
+    <EmbeddedResource Remove="Repository\**" />
+    <None Remove="DAO\**" />
+    <None Remove="Repository\**" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="DAO\" />
-    <Folder Include="Repository\Interface\" />
-  </ItemGroup>
-
+	<ItemGroup>
+	  <ProjectReference Include="..\Data Access\DataAccess.csproj" />
+	</ItemGroup>
 </Project>

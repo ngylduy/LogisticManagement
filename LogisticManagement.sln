@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data Access", "Data Access\Data Access.csproj", "{1BB51704-443D-4533-94EF-CB0DE0894A42}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "Data Access\DataAccess.csproj", "{1BB51704-443D-4533-94EF-CB0DE0894A42}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessObject", "BusinessObject\BusinessObject.csproj", "{5E6597E6-5B25-4AE1-A11B-E3336690CDD5}"
 EndProject
@@ -13,7 +13,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Business Layer", "2. Bus
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Presentation Layer", "1. Presentation Layer", "{576F68C1-ABC2-4FF7-89EF-EAE914915D38}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogisticManagement", "LogisticManagement\LogisticManagement.csproj", "{1198CAE6-8DC8-43D3-B82E-07A6FD39F2A4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogisticUI", "LogisticUI\LogisticUI.csproj", "{EDD1D451-9472-4476-8239-5704BEE597BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogisticInterface", "LogisticInterface\LogisticInterface.csproj", "{C1199E53-D3FC-4B1C-8ACF-708F3CE4795C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +31,14 @@ Global
 		{5E6597E6-5B25-4AE1-A11B-E3336690CDD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E6597E6-5B25-4AE1-A11B-E3336690CDD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5E6597E6-5B25-4AE1-A11B-E3336690CDD5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1198CAE6-8DC8-43D3-B82E-07A6FD39F2A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1198CAE6-8DC8-43D3-B82E-07A6FD39F2A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1198CAE6-8DC8-43D3-B82E-07A6FD39F2A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1198CAE6-8DC8-43D3-B82E-07A6FD39F2A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDD1D451-9472-4476-8239-5704BEE597BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDD1D451-9472-4476-8239-5704BEE597BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDD1D451-9472-4476-8239-5704BEE597BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDD1D451-9472-4476-8239-5704BEE597BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1199E53-D3FC-4B1C-8ACF-708F3CE4795C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1199E53-D3FC-4B1C-8ACF-708F3CE4795C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1199E53-D3FC-4B1C-8ACF-708F3CE4795C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1199E53-D3FC-4B1C-8ACF-708F3CE4795C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -40,7 +46,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{1BB51704-443D-4533-94EF-CB0DE0894A42} = {4B52FDBC-F478-43D9-946C-E847655F49EB}
 		{5E6597E6-5B25-4AE1-A11B-E3336690CDD5} = {960895F7-D59C-47EE-A002-1A7DFC840056}
-		{1198CAE6-8DC8-43D3-B82E-07A6FD39F2A4} = {576F68C1-ABC2-4FF7-89EF-EAE914915D38}
+		{EDD1D451-9472-4476-8239-5704BEE597BA} = {576F68C1-ABC2-4FF7-89EF-EAE914915D38}
+		{C1199E53-D3FC-4B1C-8ACF-708F3CE4795C} = {576F68C1-ABC2-4FF7-89EF-EAE914915D38}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {34DCC64E-9F65-4F9F-818F-428674F559EA}
