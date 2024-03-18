@@ -1,0 +1,57 @@
+﻿@page
+@model LogisticInterface.Pages.Dashboard.Parcel.CreateModel
+
+@{
+    ViewData["Title"] = "Add Parcel";
+}
+
+<div class="col-lg-12">
+    <div class="card mb-4">
+        <div class="card-header">Add Parcel</div>
+        <div class="card-body">
+            <form id="change-password-form" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <input type="hidden" asp-for="Parcel.SenderUserId" value="@ViewBag.CurentUser" />
+
+                <div class="mb-3">
+                    <label asp-for="Parcel.Weight" class="small mb-1"></label>
+                    <input asp-for="Parcel.Weight" class="form-control" aria-required="true" />
+                    <span asp-validation-for="Parcel.Weight" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Parcel.Dimensions" class="small mb-1"></label>
+                    <input asp-for="Parcel.Dimensions" class="form-control" aria-required="true" />
+                    <span asp-validation-for="Parcel.Dimensions" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Parcel.PickupAddressId" class="small mb-1"></label>
+                    <select asp-for="Parcel.PickupAddressId" class="form-control" asp-items="ViewBag.AddessList"></select>
+                    <span asp-validation-for="Parcel.PickupAddressId" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Parcel.ReceiverUserId" class="small mb-1"></label>
+                    <select asp-for="Parcel.ReceiverUserId" class="form-control" asp-items="ViewBag.UserList"></select>
+                    <span asp-validation-for="Parcel.ReceiverUserId" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Parcel.DeliveryAddressId" class="small mb-1"></label>
+                    <select asp-for="Parcel.DeliveryAddressId" class="form-control" asp-items="ViewBag.AddessList"></select>
+                    <span asp-validation-for="Parcel.DeliveryAddressId" class="text-danger"></span>
+                </div>
+                
+
+
+                <button class="btn btn-primary" type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
