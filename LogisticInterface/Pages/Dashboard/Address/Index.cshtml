@@ -1,0 +1,26 @@
+﻿@page
+@model LogisticInterface.Pages.Dashboard.Address.IndexModel
+
+
+
+<table class="table">
+    <tr>
+        <th>Street</th>
+        <th>City</th>
+        <th>Country</th>
+        <th>Postalcode</th>
+        <th>Action</th>
+    </tr>
+    @foreach (var address in @Model.Address)
+    {
+        <tr>
+            <td>@address.Street</td>
+            <td>@address.City</td>
+            <td>@address.Country</td>
+            <td>@address.Postalcode</td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@address.Id">Edit</a>
+            </td>
+        </tr>
+    }
+</table>

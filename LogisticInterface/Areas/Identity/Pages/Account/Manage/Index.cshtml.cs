@@ -67,6 +67,8 @@ namespace LogisticInterface.Areas.Identity.Pages.Account.Manage
 
             [Display(Name = "Address")]
             public string Address { get; set; }
+
+            public string HouseNumber { get; set; }
         }
 
         private async Task LoadAsync(AppUser user)
@@ -80,7 +82,8 @@ namespace LogisticInterface.Areas.Identity.Pages.Account.Manage
             {
                 PhoneNumber = phoneNumber,
                 FullName = user.FullName,
-                Address = user.AddressId != null ? user.AddressId : "0"
+                Address = user.AddressId != null ? user.AddressId : "0",
+                HouseNumber = user.HouseNumber
             };
         }
 
@@ -130,6 +133,7 @@ namespace LogisticInterface.Areas.Identity.Pages.Account.Manage
 
             user.FullName = Input.FullName;
             user.AddressId = Input.Address;
+            user.HouseNumber = Input.HouseNumber;
 
             await _userManager.UpdateAsync(user);
 

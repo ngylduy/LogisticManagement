@@ -5,14 +5,10 @@
     }
     else
     {
-        Layout = "/Areas/Identity/Pages/_Layout.cshtml";
+        Layout = "/Pages/Shared/_Dashboard.cshtml";
     }
 }
-
-<h1>Manage your account</h1>
-
-<div>
-    <h2>Change your account settings</h2>
+@* <div>
     <hr />
     <div class="row">
         <div class="col-md-3">
@@ -22,7 +18,16 @@
             @RenderBody()
         </div>
     </div>
+</div> *@
+
+
+<!-- Account page navigation-->
+<partial name="_ManageNav" />
+<hr class="mt-0 mb-4">
+<div class="row">
+    @RenderBody()
 </div>
+
 
 @section Scripts {
     @RenderSection("Scripts", required: false)

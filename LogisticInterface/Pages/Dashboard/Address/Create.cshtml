@@ -1,0 +1,48 @@
+﻿@page
+@model LogisticInterface.Pages.Dashboard.Address.CreateModel
+@{
+    ViewData["Title"] = "Add Address";
+}
+
+<div class="col-lg-12">
+    <div class="card mb-4">
+        <div class="card-header">Add Address</div>
+        <div class="card-body">
+            <form id="change-password-form" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="mb-3">
+                    <label asp-for="Address.Street" class="small mb-1"></label>
+                    <input asp-for="Address.Street" class="form-control" aria-required="true" />
+                    <span asp-validation-for="Address.Street" class="text-danger"></span>
+                </div>
+
+
+                <div class="mb-3">
+                    <label asp-for="Address.City" class="small mb-1"></label>
+                    <input asp-for="Address.City" class="form-control" aria-required="true" />
+                    <span asp-validation-for="Address.City" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Address.Country" class="small mb-1"></label>
+                    <input asp-for="Address.Country" class="form-control" aria-required="true" />
+                    <span asp-validation-for="Address.Country" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Address.Postalcode" class="small mb-1"></label>
+                    <input asp-for="Address.Postalcode" class="form-control" aria-required="true" />
+                    <span asp-validation-for="Address.Postalcode" class="text-danger"></span>
+                </div>
+
+
+                <button class="btn btn-primary" type="submit">Save</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
