@@ -1,0 +1,37 @@
+﻿@page "/admin/users/"
+@model IndexModel
+@{
+    ViewData["Title"] = "Role List";
+}
+
+<h3>Danh sách các users</h3>
+
+<partial name="_StatusMessage" model="@Model.StatusMessage" />
+<table class="table">
+  <tr>
+    <th>Tên User</th>
+    <th>Vai trò</th>
+    <th>Tác vụ</th>
+  </tr>
+  @foreach (var user in @Model.Users)
+  {
+      <tr>
+        <td>@user.FullName</td>
+
+            <td>
+                @if (string.IsNullOrEmpty(user.RoleName))
+                {
+                    <a class="tetx-dark" asp-page="./AddRole" asp-route-userid="@user.Id">+ Thêm Role</a>
+                }
+                else
+                {
+                    <a asp-page="./AddRole" asp-route-userid="@user.Id">@user.RoleName</a>
+                }
+            </td>
+        <td>
+            <a class="btn btn-success btn-sm" asp-page="./SetPassword" asp-route-userid="@user.Id">Set Password</a>
+            <a class="btn btn-success btn-sm" asp-page="./AddRole" asp-route-userid="@user.Id">Cập nhật Role</a>
+        </td>
+      </tr>
+  }
+</table>

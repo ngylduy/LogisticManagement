@@ -1,7 +1,31 @@
-﻿@using Microsoft.AspNetCore.Identity
-@inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
+﻿@using BusinessObject.Models
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
 
+
+<div class="account d-flex align-items-center mt-5 mt-lg-0 justify-content-center justify-content-lg-end">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage" class="nav-link me-5">
+            <h5>Hello @User.Identity?.Name!</h5>
+        </a>
+        <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })" method="post">
+            <button type="submit" class="btn btn-primary first-button signup px-4 py-3">Logout</button>
+        </form>
+    }
+    else
+    {
+        <a asp-area="Identity" asp-page="/Account/Login" class="nav-link me-5 login">
+            <h5>Login</h5>
+        </a>
+        <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-primary first-button signup px-4 py-3">
+            Register
+        </a>
+    }
+</div>
+
+@* 
 <ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))
 {
@@ -23,4 +47,4 @@ else
         <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
     </li>
 }
-</ul>
+</ul> *@
