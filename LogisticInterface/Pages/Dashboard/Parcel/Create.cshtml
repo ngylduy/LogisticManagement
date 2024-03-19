@@ -15,6 +15,12 @@
                 <input type="hidden" asp-for="Parcel.SenderUserId" value="@ViewBag.CurentUser" />
 
                 <div class="mb-3">
+                    <label asp-for="Parcel.Name" class="small mb-1"></label>
+                    <input asp-for="Parcel.Name" class="form-control" aria-required="true" />
+                    <span asp-validation-for="Parcel.Name" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
                     <label asp-for="Parcel.Weight" class="small mb-1"></label>
                     <input asp-for="Parcel.Weight" class="form-control" aria-required="true" />
                     <span asp-validation-for="Parcel.Weight" class="text-danger"></span>

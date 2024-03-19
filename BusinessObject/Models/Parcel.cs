@@ -3,6 +3,7 @@
     public partial class Parcel
     {
         public string? Id { get; set; }
+        public string? Name { get; set; }
         public int? Weight { get; set; }
         public string? Dimensions { get; set; }
 

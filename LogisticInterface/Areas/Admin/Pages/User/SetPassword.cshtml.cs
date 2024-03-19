@@ -95,8 +95,6 @@ namespace LogisticInterface.Areas.Admin.Pages.User
                 return Page();
             }
 
-            await _signInManager.RefreshSignInAsync(user);
-
             StatusMessage = $"Password has been set for {user.UserName}";
 
             return RedirectToPage();

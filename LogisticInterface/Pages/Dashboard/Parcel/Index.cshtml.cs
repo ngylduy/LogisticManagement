@@ -1,4 +1,5 @@
 using BusinessObject.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -9,10 +10,12 @@ namespace LogisticInterface.Pages.Dashboard.Parcel
     public class IndexModel : PageModel
     {
         private readonly LogisticDbContext _context;
+        private readonly UserManager<AppUser> _userManager;
 
-        public IndexModel(LogisticDbContext context)
+        public IndexModel(LogisticDbContext context, UserManager<AppUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         public IList<BusinessObject.Models.Parcel> Parcel { get; set; } = default!;
@@ -31,22 +34,53 @@ namespace LogisticInterface.Pages.Dashboard.Parcel
                 Text = c.Street + ", " + c.City + ", " + c.Country
             }).ToList();
 
+            string userRole = _userManager.GetRolesAsync(await _userManager.GetUserAsync(User)).Result.FirstOrDefault();
+            string userId = _userManager.GetUserId(User);
+
             if (addressId == null)
             {
-                Parcel = await _context.Parcels.Include(p => p.SenderUser)
-                                               .Include(p => p.ReceiverUser)
-                                               .Include(p => p.PickupAddress)
-                                               .Include(p => p.DeliveryAddress)
-                                               .ToListAsync();
+                if (userRole.Equals("Admin"))
+                {
+                    Parcel = await _context.Parcels
+                                            .Include(p => p.SenderUser)
+                                            .Include(p => p.ReceiverUser)
+                                            .Include(p => p.PickupAddress)
+                                            .Include(p => p.DeliveryAddress)
+                                            .ToListAsync();
+                }
+                else
+                {
+                    Parcel = await _context.Parcels.Where(p => p.SenderUserId == userId || p.ReceiverUserId == userId)
+                                                                   .Include(p => p.SenderUser)
+                                                                   .Include(p => p.ReceiverUser)
+                                                                   .Include(p => p.PickupAddress)
+                                                                   .Include(p => p.DeliveryAddress)
+                                                                   .ToListAsync();
+                }
                 Addresses = await _context.Addresses.ToListAsync();
             }
             else
             {
-                Parcel = await _context.Parcels.Where(p => p.DeliveryAddressId == addressId).Include(p => p.SenderUser)
-                                               .Include(p => p.ReceiverUser)
-                                               .Include(p => p.PickupAddress)
-                                               .Include(p => p.DeliveryAddress)
-                                               .ToListAsync();
+
+                if (userRole.Equals("Admin"))
+                {
+                    Parcel = await _context.Parcels.Where(p => p.DeliveryAddressId == addressId)
+                    .Include(p => p.SenderUser)
+                    .Include(p => p.ReceiverUser)
+                    .Include(p => p.PickupAddress)
+                    .Include(p => p.DeliveryAddress)
+                    .ToListAsync();
+                }
+                else
+                {
+                    Parcel = await _context.Parcels.Where(p => p.DeliveryAddressId == addressId)
+                    .Where(p => p.SenderUserId == userId || p.ReceiverUserId == userId)
+                    .Include(p => p.SenderUser)
+                    .Include(p => p.ReceiverUser)
+                    .Include(p => p.PickupAddress)
+                    .Include(p => p.DeliveryAddress)
+                    .ToListAsync();
+                }
                 Addresses = await _context.Addresses.Where(a => a.Id == addressId).ToListAsync();
             }
 
