@@ -14,6 +14,7 @@
 
         public ICollection<Parcel>? pickupParcel { get; set; }
 
+        public ICollection<ParcelHistory>? parcelHistories { get; set; }
 
     }
 }

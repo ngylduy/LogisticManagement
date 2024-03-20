@@ -21,5 +21,6 @@
         public AppUser? ReceiverUser { get; set; }
 
         public ICollection<ParcelGroupItems>? ParcelGroupItems { get; set; }
+        public ICollection<ParcelHistory>? ParcelHistories { get; set; }
     }
 }

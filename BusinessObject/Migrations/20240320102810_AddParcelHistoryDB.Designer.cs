@@ -4,6 +4,7 @@ using BusinessObject.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BusinessObject.Migrations
 {
     [DbContext(typeof(LogisticDbContext))]
-    partial class LogisticDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240320102810_AddParcelHistoryDB")]
+    partial class AddParcelHistoryDB
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -218,8 +220,7 @@ namespace BusinessObject.Migrations
 
             modelBuilder.Entity("BusinessObject.Models.ParcelHistory", b =>
                 {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<string>("ParcelId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("AddressId")
@@ -228,20 +229,14 @@ namespace BusinessObject.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("ParcelId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.HasKey("Id");
+                    b.HasKey("ParcelId");
 
                     b.HasIndex("AddressId");
-
-                    b.HasIndex("ParcelId");
 
                     b.ToTable("ParcelHistories");
                 });

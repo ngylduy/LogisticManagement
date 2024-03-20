@@ -53,10 +53,11 @@
                                             <td>@parcel.PickupAddress.Street, @parcel.PickupAddress.City, @parcel.PickupAddress.Country</td>
                                             <td>@parcel.DeliveryAddress.Street, @parcel.DeliveryAddress.City, @parcel.DeliveryAddress.Country</td>
                                             <td>
-                                                @* <a asp-page="./Detail" asp-route-id="@parcel.Id">Detail</a> | *@ 
-                                                <a asp-page="./Edit" asp-route-id="@parcel.Id">Edit</a> | 
-                                                <a asp-page="./Delete" asp-route-id="@parcel.Id">Delete</a>
-                                            </td>
+                                                    <a asp-page="./ParcelHistory" asp-route-id="@parcel.Id">View History</a> |
+                                                    <a asp-page="./Edit" asp-route-id="@parcel.Id">Edit</a> |
+                                                    <a asp-page="./Delete" asp-route-id="@parcel.Id">Delete</a> |
+                                                    <a asp-page="./EditHistory" asp-route-id="@parcel.Id">Edit History</a>
+                                                </td>
                                         </tr>
                                         }
                                     }

@@ -49,6 +49,17 @@ namespace LogisticInterface.Pages.Dashboard.Parcel
             }
 
             _context.Parcels.Add(Parcel);
+
+            var history = new ParcelHistory
+            {
+                ParcelId = Parcel.Id,
+                Status = "Created",
+                Date = DateTime.Now,
+                AddressId = Parcel.PickupAddressId
+            };
+
+            _context.ParcelHistories.Add(history);
+
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

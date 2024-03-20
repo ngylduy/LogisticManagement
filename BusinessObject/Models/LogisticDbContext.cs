@@ -20,6 +20,7 @@ namespace BusinessObject.Models
         public virtual DbSet<ParcelGroups>? ParcelGroups { get; set; }
         public virtual DbSet<ParcelGroupItems>? ParcelGroupItems { get; set; }
         public virtual DbSet<DeliveryRoutes>? DeliveryRoutes { get; set; }
+        public virtual DbSet<ParcelHistory>? ParcelHistories { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -118,6 +119,29 @@ namespace BusinessObject.Models
                 .HasForeignKey(f => f.GroupId).OnDelete(DeleteBehavior.SetNull);
             });
 
+            modelBuilder.Entity<ParcelHistory>(entity =>
+            {
+                entity.HasKey(a => a.Id);
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
+
+                entity.Property(e => e.ParcelId)
+                    .IsRequired();
+
+                entity.Property(e => e.Status)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.Date)
+                    .IsRequired();
+
+                entity.HasOne(a => a.Address)
+                .WithMany(u => u.parcelHistories)
+                .HasForeignKey(f => f.AddressId);
+
+                entity.HasOne(a => a.Parcel)
+                .WithMany(u => u.ParcelHistories)
+                .HasForeignKey(f => f.ParcelId);
+            });
         }
     }
 }

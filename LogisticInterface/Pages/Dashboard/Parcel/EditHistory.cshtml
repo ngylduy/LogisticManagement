@@ -1,0 +1,50 @@
+﻿@page "/dashboard/parcel/edithistory/{id?}"
+@model LogisticInterface.Pages.Dashboard.Parcel.EditHistoryModel
+@{
+    ViewData["Title"] = "Edit History";
+}
+
+<div class="col-lg-12">
+    <div class="card mb-4">
+        <div class="card-header">Add Parcel</div>
+        <div class="card-body">
+            <form id="change-password-form" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <input type="hidden" asp-for="ParcelHistory.ParcelId" value="@Model.Parcel.Id" />
+
+                <div class="mb-3">
+                    <label asp-for="ParcelHistory.Status" class="small mb-1"></label>
+                    <select class="form-control" asp-for="ParcelHistory.Status">
+                        <option value="Created">Created</option>
+                        <option value="Picking up">Picking up</option>
+                        <option value="Picked up">Picked up</option>
+                        <option value="Transporting">Transporting</option>
+                        <option value="Delivering">Delivering</option>
+                        <option value="Delivered">Delivered</option>
+                    </select>
+                    <span asp-validation-for="ParcelHistory.Status" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="ParcelHistory.AddressId" class="small mb-1"></label>
+                    <select asp-for="ParcelHistory.AddressId" class="form-control" asp-items="ViewBag.AddessList"></select>
+                    <span asp-validation-for="ParcelHistory.AddressId" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="ParcelHistory.Date" class="small mb-1"></label>
+                    <input asp-for="ParcelHistory.Date" class="form-control" aria-required="true" />
+                    <span asp-validation-for="ParcelHistory.Date" class="text-danger"></span>
+                </div>
+
+
+                <button class="btn btn-primary" type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
