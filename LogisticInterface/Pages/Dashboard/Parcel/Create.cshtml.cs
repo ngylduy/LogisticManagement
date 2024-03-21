@@ -43,11 +43,23 @@ namespace LogisticInterface.Pages.Dashboard.Parcel
 
         public async Task<IActionResult> OnPostAsync()
         {
+            var counter = _context.ParcelIdCounters.FirstOrDefault();
+            if (counter == null)
+            {
+                counter = new ParcelIdCounter { LastNumberUsed = 1 };
+                _context.ParcelIdCounters.Add(counter);
+            }
+            else
+            {
+                counter.LastNumberUsed++;
+            }
+
+            Parcel.Id = "DUYDT" + counter.LastNumberUsed.ToString("D6"); ;
+
             if (!ModelState.IsValid || _context.Parcels == null || Parcel == null)
             {
                 return Page();
             }
-
             _context.Parcels.Add(Parcel);
 
             var history = new ParcelHistory

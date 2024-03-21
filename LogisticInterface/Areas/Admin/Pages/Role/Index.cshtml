@@ -7,11 +7,10 @@
 <h3>Danh sách các role</h3>
 <partial name="_StatusMessage" model="@Model.StatusMessage" />
 
-<div class="my-1 d-inline">
+<div class="mb-3 d-blocl">
     <a class="btn btn-secondary" asp-page="./Create">Thêm mới Role</a>
+     <a class="btn btn-secondary" asp-page="../User/Index">Gán role cho người dùng</a>
 </div>
-
-<a class="btn btn-secondary" asp-page="../User/Index">Gán role cho người dùng</a>
 
 <table class="table">
   <tr>

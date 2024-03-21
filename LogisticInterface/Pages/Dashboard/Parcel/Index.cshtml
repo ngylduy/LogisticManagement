@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Parcel";
 }
-<div class="container mb-4">
+<div class="mb-4">
     <div class="row">
         <div class="col">
             <div class="card position-relative">
@@ -20,53 +20,53 @@
     </div>
 </div>
 
-<div class="container">
-    <div class="row">
+<div class="row">
         @foreach(var address in Model.Addresses){
-        <div class="col">
-            <div class="card mb-4">
-                <div class="card-header">@address.Street, @address.City, @address.Country</div>
-                <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                <thead>
-                                    <tr>
-                                        <th>@Html.DisplayNameFor(model => model.Parcel[0].Name)</th>
-                                        <th>@Html.DisplayNameFor(model => model.Parcel[0].Weight)</th>
-                                        <th>@Html.DisplayNameFor(model => model.Parcel[0].Dimensions)</th>
-                                        <th>@Html.DisplayNameFor(model => model.Parcel[0].SenderUser)</th>
-                                        <th>@Html.DisplayNameFor(model => model.Parcel[0].ReceiverUser)</th>
-                                        <th>@Html.DisplayNameFor(model => model.Parcel[0].PickupAddress)</th>
-                                        <th>@Html.DisplayNameFor(model => model.Parcel[0].DeliveryAddress)</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach(var parcel in Model.Parcel){
-                                        @if(parcel.DeliveryAddressId == address.Id){
+                <div class="col-12">
+                    <div class="card mb-4">
+                        <div class="card-header">@address.Street, @address.City, @address.Country</div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
                                         <tr>
-                                            <td>@parcel.Name</td>
-                                            <td>@parcel.Weight</td>
-                                            <td>@parcel.Dimensions</td>
-                                            <td>@parcel.SenderUser.FullName</td>
-                                            <td>@parcel.ReceiverUser.FullName</td>
-                                            <td>@parcel.PickupAddress.Street, @parcel.PickupAddress.City, @parcel.PickupAddress.Country</td>
-                                            <td>@parcel.DeliveryAddress.Street, @parcel.DeliveryAddress.City, @parcel.DeliveryAddress.Country</td>
-                                            <td>
-                                                    <a asp-page="./ParcelHistory" asp-route-id="@parcel.Id">View History</a> |
-                                                    <a asp-page="./Edit" asp-route-id="@parcel.Id">Edit</a> |
-                                                    <a asp-page="./Delete" asp-route-id="@parcel.Id">Delete</a> |
-                                                    <a asp-page="./EditHistory" asp-route-id="@parcel.Id">Edit History</a>
-                                                </td>
+                                            <th>@Html.DisplayNameFor(model => model.Parcel[0].Name)</th>
+                                            <th>@Html.DisplayNameFor(model => model.Parcel[0].Weight)</th>
+                                            <th>@Html.DisplayNameFor(model => model.Parcel[0].Dimensions)</th>
+                                            <th>@Html.DisplayNameFor(model => model.Parcel[0].SenderUser)</th>
+                                            <th>@Html.DisplayNameFor(model => model.Parcel[0].ReceiverUser)</th>
+                                            <th>@Html.DisplayNameFor(model => model.Parcel[0].PickupAddress)</th>
+                                            <th>@Html.DisplayNameFor(model => model.Parcel[0].DeliveryAddress)</th>
+                                            <th>Action</th>
                                         </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var parcel in Model.Parcel)
+                                        {
+                                            @if (parcel.DeliveryAddressId == address.Id)
+                                            {
+                                                <tr>
+                                                    <td>@parcel.Name</td>
+                                                    <td>@parcel.Weight</td>
+                                                    <td>@parcel.Dimensions</td>
+                                                    <td>@parcel.SenderUser.FullName</td>
+                                                    <td>@parcel.ReceiverUser.FullName</td>
+                                                    <td>@parcel.PickupAddress.Street, @parcel.PickupAddress.City, @parcel.PickupAddress.Country</td>
+                                                    <td>@parcel.DeliveryAddress.Street, @parcel.DeliveryAddress.City, @parcel.DeliveryAddress.Country</td>
+                                                    <td>
+                                                        <a asp-page="./ParcelHistory" asp-route-id="@parcel.Id">View History</a> |
+                                                        <a asp-page="./Edit" asp-route-id="@parcel.Id">Edit</a> |
+                                                        <a asp-page="./Delete" asp-route-id="@parcel.Id">Delete</a> |
+                                                        <a asp-page="./EditHistory" asp-route-id="@parcel.Id">Edit History</a>
+                                                    </td>
+                                                </tr>
+                                            }
                                         }
-                                    }
-                                </tbody>
-                            </table>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
+                    </div>
                 </div>
-            </div>
-        </div>
         }
     </div>
-</div>

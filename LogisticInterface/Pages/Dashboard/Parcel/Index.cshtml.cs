@@ -57,7 +57,8 @@ namespace LogisticInterface.Pages.Dashboard.Parcel
                                                                    .Include(p => p.DeliveryAddress)
                                                                    .ToListAsync();
                 }
-                Addresses = await _context.Addresses.ToListAsync();
+                Addresses = await _context.Addresses.Where(a => a.deliveryParcel.Count > 0)
+                     .ToListAsync();
             }
             else
             {

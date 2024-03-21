@@ -42,6 +42,16 @@ public class EditHistoryModel : PageModel
 
     public async Task<IActionResult> OnPostAsync()
     {
+        if (!ModelState.IsValid)
+        {
+            foreach (var modelState in ModelState.Values)
+            {
+                foreach (var error in modelState.Errors)
+                {
+                    Console.WriteLine(error.ErrorMessage);
+                }
+            }
+        }
         if (!ModelState.IsValid || _context.ParcelHistories == null || ParcelHistory == null)
         {
             return Page();

@@ -4,6 +4,7 @@ using BusinessObject.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BusinessObject.Migrations
 {
     [DbContext(typeof(LogisticDbContext))]
-    partial class LogisticDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240320123357_EditParcelHistoryId")]
+    partial class EditParcelHistoryId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,7 +44,7 @@ namespace BusinessObject.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Addresses", (string)null);
+                    b.ToTable("Addresses");
                 });
 
             modelBuilder.Entity("BusinessObject.Models.AppUser", b =>
@@ -141,7 +143,7 @@ namespace BusinessObject.Migrations
 
                     b.HasIndex("GroupId");
 
-                    b.ToTable("DeliveryRoutes", (string)null);
+                    b.ToTable("DeliveryRoutes");
                 });
 
             modelBuilder.Entity("BusinessObject.Models.Parcel", b =>
@@ -181,7 +183,7 @@ namespace BusinessObject.Migrations
 
                     b.HasIndex("SenderUserId");
 
-                    b.ToTable("Parcels", (string)null);
+                    b.ToTable("Parcels");
                 });
 
             modelBuilder.Entity("BusinessObject.Models.ParcelGroupItems", b =>
@@ -196,7 +198,7 @@ namespace BusinessObject.Migrations
 
                     b.HasIndex("ParcelId");
 
-                    b.ToTable("ParcelGroupItems", (string)null);
+                    b.ToTable("ParcelGroupItems");
                 });
 
             modelBuilder.Entity("BusinessObject.Models.ParcelGroups", b =>
@@ -213,7 +215,7 @@ namespace BusinessObject.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ParcelGroups", (string)null);
+                    b.ToTable("ParcelGroups");
                 });
 
             modelBuilder.Entity("BusinessObject.Models.ParcelHistory", b =>
@@ -244,20 +246,7 @@ namespace BusinessObject.Migrations
 
                     b.HasIndex("ParcelId");
 
-                    b.ToTable("ParcelHistories", (string)null);
-                });
-
-            modelBuilder.Entity("BusinessObject.Models.ParcelIdCounter", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("LastNumberUsed")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ParcelIdCounters", (string)null);
+                    b.ToTable("ParcelHistories");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

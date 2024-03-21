@@ -21,6 +21,7 @@ namespace BusinessObject.Models
         public virtual DbSet<ParcelGroupItems>? ParcelGroupItems { get; set; }
         public virtual DbSet<DeliveryRoutes>? DeliveryRoutes { get; set; }
         public virtual DbSet<ParcelHistory>? ParcelHistories { get; set; }
+        public virtual DbSet<ParcelIdCounter>? ParcelIdCounters { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -67,7 +68,6 @@ namespace BusinessObject.Models
             modelBuilder.Entity<Parcel>(entity =>
             {
                 entity.HasKey(e => e.Id);
-                entity.Property(e => e.Id).ValueGeneratedOnAdd();
 
                 entity.HasOne(d => d.DeliveryAddress)
                     .WithMany(p => p.deliveryParcel)
@@ -127,6 +127,9 @@ namespace BusinessObject.Models
                 entity.Property(e => e.ParcelId)
                     .IsRequired();
 
+                entity.Property(e => e.AddressId)
+                    .IsRequired();
+
                 entity.Property(e => e.Status)
                     .IsRequired()
                     .HasMaxLength(50);
@@ -141,6 +144,12 @@ namespace BusinessObject.Models
                 entity.HasOne(a => a.Parcel)
                 .WithMany(u => u.ParcelHistories)
                 .HasForeignKey(f => f.ParcelId);
+            });
+
+            modelBuilder.Entity<ParcelIdCounter>(entity =>
+            {
+                entity.HasKey(a => a.Id);
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
             });
         }
     }

@@ -42,7 +42,9 @@ namespace LogisticInterface.Pages.Dashboard.Parcel
             {
                 return NotFound();
             }
-            var parcel = await _context.Parcels.FindAsync(id);
+            var parcel = await _context.Parcels
+                        .Include(p => p.ParcelHistories)
+                        .FirstOrDefaultAsync(p => p.Id == id);
 
             if (parcel != null)
             {

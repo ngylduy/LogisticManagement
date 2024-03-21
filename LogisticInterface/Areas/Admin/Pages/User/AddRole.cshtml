@@ -4,7 +4,7 @@
     ViewData["Title"] = "Set Role";
 }
 
-<h3>Set password for user: @Model.user.UserName</h3>
+<h3>Set role for user: @Model.user.UserName</h3>
 
 <partial name="_StatusMessage" for="StatusMessage" />
 
@@ -21,7 +21,7 @@
                 <label asp-for="RoleNames" class="form-label"></label>
                 <span asp-validation-for="RoleNames" class="text-danger"></span>
             </div>
-            <button type="submit" class="w-100 btn btn-lg btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
             <a class="btn btn-primary" asp-page="./Index">Users list</a>
         </form>
     </div>

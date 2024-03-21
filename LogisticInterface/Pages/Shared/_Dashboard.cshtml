@@ -93,11 +93,27 @@
 
 
             <!-- Nav Item - Charts -->
-            <li class="nav-item">
+            @* <li class="nav-item">
                 <a class="nav-link" asp-page="/Dashboard/Parcel/Index">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Parcel Manager</span>
                 </a>
+            </li> *@
+
+            <li class="nav-item">
+
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+                   aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Parcel Manager</span>
+                </a>
+
+                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" asp-page="/Dashboard/Parcel/SendParcel">Parcel sent</a>
+                        <a class="collapse-item" asp-page="/Dashboard/Parcel/ReciveParcel">Parcel received</a>
+                    </div>
+                </div>
             </li>
 
             <!-- Nav Item - Charts -->
