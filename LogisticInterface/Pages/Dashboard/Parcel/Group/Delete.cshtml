@@ -1,4 +1,16 @@
-﻿@page
+﻿@page "/dashboard/parcel/group/delete/{id}"
 @model LogisticInterface.Pages.Dashboard.Parcel.Group.DeleteModel
 @{
+ViewData["Title"] = "Delete Parcel Group";
 }
+
+<div class="row">
+    <div class="col-md-6">
+        <form method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <p>Are you sure to delete: <strong>@Model.ParcelGroups.GroupName</strong> </p>
+            <a class="btn btn-primary" asp-page="./Index">Danh sách</a>
+            <button type="submit" asp-page="./Delete" class="btn btn-danger">Xóa</button>
+        </form>
+    </div>
+</div>

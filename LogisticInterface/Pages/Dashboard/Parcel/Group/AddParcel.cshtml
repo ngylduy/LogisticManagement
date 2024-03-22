@@ -1,0 +1,36 @@
+﻿@page "/dashboard/parcel/group/addparcel/{id}"
+@model LogisticInterface.Pages.Dashboard.Parcel.Group.AddParcelModel
+@{
+ViewData["Title"] = "Add Parcel to Group";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card mb-4">
+            <div class="card-header">Add Parcel to Group</div>
+            <div class="card-body">
+                <form method="post">
+                    <div class="form-group">
+                        <select asp-for="ParcelsId" multiple="multiple" class="w-100" asp-items="ViewBag.ParcelList"></select>
+                    </div>
+                    <button class="btn btn-primary" type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script src="~/lib/multiple-select/multiple-select.min.js"></script>
+    <link rel="stylesheet" href="~/lib/multiple-select/multiple-select.min.css" />
+    <script>
+        $('#ParcelsId').multipleSelect({
+            selectAll: false,
+            keepOpen: false,
+            isOpen: false
+        });
+    </script>
+
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,4 +1,65 @@
-﻿@page
+﻿@page "/dashboard/parcel/group"
 @model LogisticInterface.Pages.Dashboard.Parcel.Group.IndexModel
 @{
+    ViewData["Title"] = "Parcel Group";
 }
+
+<div class="mb-4">
+    <div class="row">
+        <div class="col">
+            <div class="card position-relative">
+                <div class="card-body">
+                    <a asp-page="./Create" class="btn btn-primary">Create new group</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    @foreach (var parcelGroup in Model.Groups)
+    {
+        <div class="col-12">
+            <div class="card mb-4">
+                <div class="card-header">@parcelGroup.GroupName</div>
+                <div class="card-body">
+                    <p>@parcelGroup.Description</p>
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>@Html.DisplayNameFor(model => model.Parcels[0].Name)</th>
+                                    <th>@Html.DisplayNameFor(model => model.Parcels[0].Weight)</th>
+                                    <th>@Html.DisplayNameFor(model => model.Parcels[0].Dimensions)</th>
+                                    <th>@Html.DisplayNameFor(model => model.Parcels[0].SenderUser)</th>
+                                    <th>@Html.DisplayNameFor(model => model.Parcels[0].ReceiverUser)</th>
+                                    <th>@Html.DisplayNameFor(model => model.Parcels[0].PickupAddress)</th>
+                                    <th>@Html.DisplayNameFor(model => model.Parcels[0].DeliveryAddress)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            @foreach (var parcelGroupItem in parcelGroup.ParcelGroupItems)
+                            {
+                                <tr>
+                                    <td>@parcelGroupItem.ParcelItem.Name</td>
+                                    <td>@parcelGroupItem.ParcelItem.Weight</td>
+                                    <td>@parcelGroupItem.ParcelItem.Dimensions</td>
+                                    <td>@parcelGroupItem.ParcelItem.SenderUser.FullName</td>
+                                    <td>@parcelGroupItem.ParcelItem.ReceiverUser.FullName</td>
+                                    <td>@parcelGroupItem.ParcelItem.PickupAddress.Street, @parcelGroupItem.ParcelItem.PickupAddress.City, @parcelGroupItem.ParcelItem.PickupAddress.Country</td>
+                                    <td>@parcelGroupItem.ParcelItem.DeliveryAddress.Street, @parcelGroupItem.ParcelItem.DeliveryAddress.City, @parcelGroupItem.ParcelItem.DeliveryAddress.Country</td>
+                                </tr>
+                            }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                        <a asp-page="./Edit" class="btn btn-primary" asp-route-id="@parcelGroup.Id">Edit Group</a>
+                        <a asp-page="./Delete" class="btn btn-danger" asp-route-id="@parcelGroup.Id">Delete Group</a>
+                        <a asp-page="./AddParcel" class="btn btn-success" asp-route-id="@parcelGroup.Id">Edit Parcel in Group</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

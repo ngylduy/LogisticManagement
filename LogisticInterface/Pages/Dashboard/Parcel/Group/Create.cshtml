@@ -1,4 +1,30 @@
-﻿@page
+﻿@page "/dashboard/parcel/group/create"
 @model LogisticInterface.Pages.Dashboard.Parcel.Group.CreateModel
 @{
+ViewData["Title"] = "Create Parcel Group";
 }
+
+<div class="row">
+    <div class="col-12">
+        <div class="card mb-4">
+            <div class="card-header">Create Parcel Group</div>
+            <div class="card-body">
+                <form method="post">
+                    <div class="form-group">
+                        <label asp-for="ParcelGroup.GroupName" class="small mb-1"></label>
+                        <input asp-for="ParcelGroup.GroupName" class="form-control" aria-required="true" />
+                        <span asp-validation-for="ParcelGroup.GroupName" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="ParcelGroup.Description" class="small mb-1"></label>
+                        <input asp-for="ParcelGroup.Description" class="form-control" aria-required="true" />
+                        <span asp-validation-for="ParcelGroup.Description" class="text-danger"></span>
+                    </div>
+
+                    <button class="btn btn-primary" type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

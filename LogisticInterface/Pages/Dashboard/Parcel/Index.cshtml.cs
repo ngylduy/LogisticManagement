@@ -21,7 +21,7 @@ namespace LogisticInterface.Pages.Dashboard.Parcel
         public IList<BusinessObject.Models.Parcel> Parcel { get; set; } = default!;
         public IList<BusinessObject.Models.Address> Addresses { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(string addressId)
+        public async Task<IActionResult> OnGetAsync(string? addressId, string? street, string? city, string? country)
         {
             if (_context.Parcels == null)
             {
@@ -33,6 +33,28 @@ namespace LogisticInterface.Pages.Dashboard.Parcel
                 Value = c.Id,
                 Text = c.Street + ", " + c.City + ", " + c.Country
             }).ToList();
+
+            ViewData["StreetList"] = _context.Addresses.Select(c => new SelectListItem
+            {
+                Value = c.Street,
+                Text = c.Street
+            }).ToList();
+
+            ViewData["CityList"] = _context.Addresses.Select(c => c.City)
+                .Distinct()
+                .Select(c => new SelectListItem
+                {
+                    Value = c,
+                    Text = c
+                }).ToList();
+
+            ViewData["CountryList"] = _context.Addresses.Select(c => c.Country)
+                .Distinct()
+                .Select(c => new SelectListItem
+                {
+                    Value = c,
+                    Text = c
+                }).ToList();
 
             string userRole = _userManager.GetRolesAsync(await _userManager.GetUserAsync(User)).Result.FirstOrDefault();
             string userId = _userManager.GetUserId(User);
