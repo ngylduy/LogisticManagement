@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LogisticInterface.Pages.Dashboard.Parcel;
 
-[Authorize(Roles = "Customer")]
+[Authorize]
 public class IndexModel : PageModel
 {
     private readonly LogisticDbContext _context;
