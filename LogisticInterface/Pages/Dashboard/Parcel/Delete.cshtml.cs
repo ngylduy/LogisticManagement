@@ -1,9 +1,11 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
 namespace LogisticInterface.Pages.Dashboard.Parcel
 {
+    [Authorize]
     public class DeleteModel : PageModel
     {
         private readonly BusinessObject.Models.LogisticDbContext _context;

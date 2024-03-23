@@ -1,60 +1,61 @@
 using BusinessObject.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
-namespace LogisticInterface.Pages.Dashboard.Parcel.Group
+namespace LogisticInterface.Pages.Dashboard.Parcel.Group;
+
+[Authorize(Roles = "Admin")]
+public class DeleteModel : PageModel
 {
-    public class DeleteModel : PageModel
+    private readonly BusinessObject.Models.LogisticDbContext _context;
+
+    public DeleteModel(BusinessObject.Models.LogisticDbContext context)
     {
-        private readonly BusinessObject.Models.LogisticDbContext _context;
+        _context = context;
+    }
 
-        public DeleteModel(BusinessObject.Models.LogisticDbContext context)
+    [BindProperty]
+    public ParcelGroups ParcelGroups { get; set; } = default!;
+
+    public async Task<IActionResult> OnGetAsync(string? id)
+    {
+        if (id == null || _context.ParcelGroups == null)
         {
-            _context = context;
+            return NotFound();
         }
 
-        [BindProperty]
-        public ParcelGroups ParcelGroups { get; set; } = default!;
+        var group = await _context.ParcelGroups.FirstOrDefaultAsync(m => m.Id == id);
 
-        public async Task<IActionResult> OnGetAsync(string? id)
+        if (group == null)
         {
-            if (id == null || _context.ParcelGroups == null)
-            {
-                return NotFound();
-            }
+            return NotFound();
+        }
+        else
+        {
+            ParcelGroups = group;
+        }
+        return Page();
+    }
 
-            var group = await _context.ParcelGroups.FirstOrDefaultAsync(m => m.Id == id);
+    public async Task<IActionResult> OnPostAsync(string? id)
+    {
+        if (id == null || _context.ParcelGroups == null)
+        {
+            return NotFound();
+        }
+        var group = await _context.ParcelGroups
+                    .Include(p => p.ParcelGroupItems)
+                    .FirstOrDefaultAsync(p => p.Id == id);
 
-            if (group == null)
-            {
-                return NotFound();
-            }
-            else
-            {
-                ParcelGroups = group;
-            }
-            return Page();
+        if (group != null)
+        {
+            ParcelGroups = group;
+            _context.ParcelGroups.Remove(group);
+            await _context.SaveChangesAsync();
         }
 
-        public async Task<IActionResult> OnPostAsync(string? id)
-        {
-            if (id == null || _context.ParcelGroups == null)
-            {
-                return NotFound();
-            }
-            var group = await _context.ParcelGroups
-                        .Include(p => p.ParcelGroupItems)
-                        .FirstOrDefaultAsync(p => p.Id == id);
-
-            if (group != null)
-            {
-                ParcelGroups = group;
-                _context.ParcelGroups.Remove(group);
-                await _context.SaveChangesAsync();
-            }
-
-            return RedirectToPage("./Index");
-        }
+        return RedirectToPage("./Index");
     }
 }

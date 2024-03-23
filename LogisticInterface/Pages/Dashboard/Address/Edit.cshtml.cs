@@ -1,70 +1,71 @@
 using BusinessObject.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
-namespace LogisticInterface.Pages.Dashboard.Address
-{
-    public class EditModel : PageModel
-    {
-        private readonly LogisticDbContext _context;
+namespace LogisticInterface.Pages.Dashboard.Address;
 
-        public EditModel(LogisticDbContext context)
+[Authorize(Roles = "Admin")]
+public class EditModel : PageModel
+{
+    private readonly LogisticDbContext _context;
+
+    public EditModel(LogisticDbContext context)
+    {
+        _context = context;
+    }
+
+    public async Task<IActionResult> OnGetAsync(string? id)
+    {
+        if (id == null || _context.Addresses == null)
         {
-            _context = context;
+            return NotFound();
         }
 
-        public async Task<IActionResult> OnGetAsync(string? id)
+        var address = await _context.Addresses.FirstOrDefaultAsync(m => m.Id == id);
+        if (address == null)
         {
-            if (id == null || _context.Addresses == null)
-            {
-                return NotFound();
-            }
+            return NotFound();
+        }
+        Address = address;
 
-            var address = await _context.Addresses.FirstOrDefaultAsync(m => m.Id == id);
-            if (address == null)
-            {
-                return NotFound();
-            }
-            Address = address;
+        return Page();
+    }
 
+    [BindProperty]
+    public BusinessObject.Models.Address Address { get; set; } = default!;
+
+    public async Task<IActionResult> OnPostAsync()
+    {
+        if (!ModelState.IsValid)
+        {
             return Page();
         }
 
-        [BindProperty]
-        public BusinessObject.Models.Address Address { get; set; } = default!;
+        _context.Attach(Address).State = EntityState.Modified;
 
-        public async Task<IActionResult> OnPostAsync()
+        try
         {
-            if (!ModelState.IsValid)
+            await _context.SaveChangesAsync();
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            if (!AddressExists(Address.Id))
             {
-                return Page();
+                return NotFound();
             }
-
-            _context.Attach(Address).State = EntityState.Modified;
-
-            try
+            else
             {
-                await _context.SaveChangesAsync();
+                throw;
             }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!AddressExists(Address.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return RedirectToPage("./Index");
         }
 
-        private bool AddressExists(string id)
-        {
-            return (_context.Addresses?.Any(e => e.Id == id)).GetValueOrDefault();
-        }
+        return RedirectToPage("./Index");
+    }
+
+    private bool AddressExists(string id)
+    {
+        return (_context.Addresses?.Any(e => e.Id == id)).GetValueOrDefault();
     }
 }

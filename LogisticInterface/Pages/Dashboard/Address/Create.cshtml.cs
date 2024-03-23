@@ -1,37 +1,38 @@
 using BusinessObject.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace LogisticInterface.Pages.Dashboard.Address
+namespace LogisticInterface.Pages.Dashboard.Address;
+
+[Authorize(Roles = "Admin")]
+public class CreateModel : PageModel
 {
-    public class CreateModel : PageModel
+    private readonly LogisticDbContext _context;
+
+    public CreateModel(LogisticDbContext context)
     {
-        private readonly LogisticDbContext _context;
+        _context = context;
+    }
 
-        public CreateModel(LogisticDbContext context)
+    public void OnGet()
+    {
+    }
+
+    [BindProperty]
+    public BusinessObject.Models.Address Address { get; set; } = default!;
+
+
+    public async Task<IActionResult> OnPostAsync()
+    {
+        if (!ModelState.IsValid || _context.Addresses == null || Address == null)
         {
-            _context = context;
+            return Page();
         }
 
-        public void OnGet()
-        {
-        }
+        _context.Addresses.Add(Address);
+        await _context.SaveChangesAsync();
 
-        [BindProperty]
-        public BusinessObject.Models.Address Address { get; set; } = default!;
-
-
-        public async Task<IActionResult> OnPostAsync()
-        {
-            if (!ModelState.IsValid || _context.Addresses == null || Address == null)
-            {
-                return Page();
-            }
-
-            _context.Addresses.Add(Address);
-            await _context.SaveChangesAsync();
-
-            return RedirectToPage("./Index");
-        }
+        return RedirectToPage("./Index");
     }
 }

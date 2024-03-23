@@ -1,10 +1,12 @@
 using BusinessObject.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
 namespace LogisticInterface.Pages.Dashboard.Parcel
 {
+    [Authorize]
     public class ParcelHistoryModel : PageModel
     {
         private readonly LogisticDbContext _context;

@@ -1,4 +1,31 @@
 ﻿@page "/dashboard/parcel/group/edit/{id}"
 @model LogisticInterface.Pages.Dashboard.Parcel.Group.EditModel
 @{
+    ViewData["Title"] = "Edit Parcel Group";
 }
+
+<div class="row">
+    <div class="col-12">
+        <div class="card mb-4">
+            <div class="card-header">Create Parcel Group</div>
+            <div class="card-body">
+                <form method="post">
+                    <input type="hidden" asp-for="ParcelGroups.Id" />
+                    <div class="form-group">
+                        <label asp-for="ParcelGroups.GroupName" class="small mb-1"></label>
+                        <input asp-for="ParcelGroups.GroupName" class="form-control" aria-required="true" />
+                        <span asp-validation-for="ParcelGroups.GroupName" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="ParcelGroups.Description" class="small mb-1"></label>
+                        <input asp-for="ParcelGroups.Description" class="form-control" aria-required="true" />
+                        <span asp-validation-for="ParcelGroups.Description" class="text-danger"></span>
+                    </div>
+
+                    <button class="btn btn-primary" type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

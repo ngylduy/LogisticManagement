@@ -1,37 +1,38 @@
 using BusinessObject.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace LogisticInterface.Pages.Dashboard.Parcel.Group
+namespace LogisticInterface.Pages.Dashboard.Parcel.Group;
+
+[Authorize(Roles = "Admin")]
+public class CreateModel : PageModel
 {
-    public class CreateModel : PageModel
+
+    private readonly LogisticDbContext _context;
+
+    public CreateModel(LogisticDbContext context)
     {
+        _context = context;
+    }
 
-        private readonly LogisticDbContext _context;
+    [BindProperty]
+    public ParcelGroups ParcelGroup { get; set; }
 
-        public CreateModel(LogisticDbContext context)
+    public void OnGet()
+    {
+    }
+
+    public async Task<IActionResult> OnPostAsync()
+    {
+        if (!ModelState.IsValid)
         {
-            _context = context;
+            return Page();
         }
 
-        [BindProperty]
-        public ParcelGroups ParcelGroup { get; set; }
+        _context.ParcelGroups.Add(ParcelGroup);
+        await _context.SaveChangesAsync();
 
-        public void OnGet()
-        {
-        }
-
-        public async Task<IActionResult> OnPostAsync()
-        {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-
-            _context.ParcelGroups.Add(ParcelGroup);
-            await _context.SaveChangesAsync();
-
-            return RedirectToPage("./Index");
-        }
+        return RedirectToPage("./Index");
     }
 }

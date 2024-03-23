@@ -1,27 +1,28 @@
 using BusinessObject.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
-namespace LogisticInterface.Pages.Dashboard.Address
+namespace LogisticInterface.Pages.Dashboard.Address;
+
+[Authorize(Roles = "Admin")]
+public class IndexModel : PageModel
 {
-    public class IndexModel : PageModel
+
+    private readonly LogisticDbContext _context;
+
+    public IndexModel(LogisticDbContext context)
     {
+        _context = context;
+    }
 
-        private readonly LogisticDbContext _context;
+    public IList<BusinessObject.Models.Address> Address { get; set; }
 
-        public IndexModel(LogisticDbContext context)
-        {
-            _context = context;
-        }
+    public async Task<IActionResult> OnGetAsync()
+    {
+        Address = await _context.Addresses.ToListAsync();
 
-        public IList<BusinessObject.Models.Address> Address { get; set; }
-
-        public async Task<IActionResult> OnGetAsync()
-        {
-            Address = await _context.Addresses.ToListAsync();
-
-            return Page();
-        }
+        return Page();
     }
 }
